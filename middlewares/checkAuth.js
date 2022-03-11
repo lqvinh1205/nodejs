@@ -3,6 +3,6 @@ export const checkAuth = (req, res, next) => {
     if(status) {
         next();
     } else {
-        console.log("Tu choi truy cap");
+        console.log("Ban khong the truy cap");
     }
 }
