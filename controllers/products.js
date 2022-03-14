@@ -9,7 +9,7 @@ import mongoose from "mongoose";
 //1. Khoi tao modal
 const Product = mongoose.model("Product", {name: String})
 
-export const list = async (req, res,) => {
+export const list = async (req, res) => {
     try {
         const products = await Product.find()
         res.json(products);
@@ -19,8 +19,15 @@ export const list = async (req, res,) => {
         })
     }
 }
-export const read = (req, res,) => {
-    res.json(products.find(item => item.id === +req.params.id));
+export const read = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id)
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            messages: "Khong tim thay san pham"
+        })
+    }
 }
 export const create = async (req, res) => {
     try {
@@ -32,9 +39,25 @@ export const create = async (req, res) => {
         })
     }
 }
-export const remove = (req, res) => {
-    res.json(products.filter(item => item.id !== +req.params.id))
+export const remove = async (req, res) => {
+    try {
+        console.log(req.params.id);
+        const product = await Product.findByIdAndRemove(req.params.id)
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            messages: "Khong the xoa san pham"
+        })
+    }
+    // res.json(products.filter(item => item.id !== +req.params.id))
 }
-export const update = (req, res) => {
-    res.json(products.map(item => item.id === +req.params.id ? req.body : item))
+export const update = async (req, res) => {
+    try {
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body)
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            messages: "Khong the cap nhat"
+        })
+    }
 }
