@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 // import router
 import productsRouter from "../routes/products"
+import postsRouter from "../routes/posts"
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.json());
 
 // route
 app.use("/api", productsRouter)
+app.use("/api", postsRouter)
 
 // connect database
 mongoose.connect("mongodb://localhost:27017/nodejs")

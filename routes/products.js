@@ -9,4 +9,5 @@ router.get("/product/:id", checkAuth, read)
 router.post("/products", checkAuth, create)
 router.delete("/product/:id", checkAuth, remove)
 router.put("/product/:id", checkAuth, update)
+
 export default router;
