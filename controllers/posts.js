@@ -47,7 +47,7 @@ export const remove = async (req, res) => {
 }
 export const update = async (req, res) => {
     try {
-        const post = await Post.findByIdAndUpdate(req.params.id, req.body)
+        const post = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(post)
     } catch (error) {
         res.status(400).json({

@@ -4,11 +4,12 @@
 //     {id: 3, name: "San pham C"},
 // ]
 
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 
 //1. Khoi tao modal
-const Product = mongoose.model("Product", {name: String})
+// const Product = mongoose.model("Product", {name: String})
 
+import Product from '../modals/products'
 export const list = async (req, res) => {
     try {
         const products = await Product.find()
@@ -53,7 +54,7 @@ export const remove = async (req, res) => {
 }
 export const update = async (req, res) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body)
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(product)
     } catch (error) {
         res.status(400).json({
