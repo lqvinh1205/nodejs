@@ -4,8 +4,9 @@ import morgan from "morgan";
 import mongoose from "mongoose";
 
 // import router
-import productsRouter from "../routes/products"
-import postsRouter from "../routes/posts"
+import productsRouter from "./routes/products"
+import postsRouter from "./routes/posts"
+import usersRouter from "./routes/users"
 
 
 const app = express();
@@ -18,7 +19,7 @@ app.use(express.json());
 // route
 app.use("/api", productsRouter)
 app.use("/api", postsRouter)
-
+app.use("/api", usersRouter)
 // connect database
 mongoose.connect("mongodb://localhost:27017/nodejs")
     .then(() => console.log("Kết nối db thành công"))
@@ -26,7 +27,7 @@ mongoose.connect("mongodb://localhost:27017/nodejs")
  
 
 // connection
-const PORT = 3001;
+const PORT = 8000;
 app.listen(PORT, () => {
     console.log("server is running port ", PORT);
 })
