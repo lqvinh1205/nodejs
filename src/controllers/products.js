@@ -25,7 +25,7 @@ export const list = async (req, res) => {
 }
 
 export const read = async (req, res) => {
-    const filter = req.body.id
+    const filter = req.params.id
     console.log(filter);
     try {
         const product = await Product.findById(filter).exec()
@@ -33,6 +33,31 @@ export const read = async (req, res) => {
     } catch (error) {
         res.status(400).json({
             error: "Khong tim duoc san pham"
+        })
+    }
+}
+export const remove = async (req, res) => {
+    const filter = req.params.id
+    try {
+        const product = await Product.findByIdAndRemove(filter).exec()
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            error: "Khong xoa duoc san pham"
+        })
+    }
+}
+
+export const update = async (req, res) => {
+    const filter = { slug: req.params.slug}
+    req.body.slug = slugify(req.body.name)
+    console.log(filter);
+    try {
+        const product = await Product.findOneAndUpdate(filter, req.body, { new : true}).exec()
+        res.json(product)
+    } catch (error) {
+        res.status(400).json({
+            error: "Khong update duoc san pham"
         })
     }
 }
