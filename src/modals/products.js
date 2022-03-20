@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, ObjectId } from "mongoose";
 
 const Product = new Schema({
     name: {
@@ -14,6 +14,10 @@ const Product = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    category: {
+        type: ObjectId,
+        ref: "Category"
     }
 }, { timestamps: true})
 

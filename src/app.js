@@ -1,7 +1,11 @@
 import express from "express"
 import morgan from "morgan"
 import mongoose from "mongoose"
+
+
+//import routes
 import routerProduct from './routes/products'
+import routerCategory from './routes/category'
 
 // Khởi tạo đối tượng app từ thư viện express
 const app = express()
@@ -13,6 +17,7 @@ app.use(express.json())
 
 // Sử dụng các router được định nghĩa
 app.use('/api', routerProduct)
+app.use('/api', routerCategory)
 
 
 // connect database

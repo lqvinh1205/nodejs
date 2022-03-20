@@ -8,7 +8,7 @@ export const create = async (req, res) => {
         res.json(product)
     } catch (error) {
         res.status(400).json({
-            error: "Khong them duoc san pham"
+            error
         })
     }
 }
