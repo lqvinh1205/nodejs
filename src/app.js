@@ -8,6 +8,7 @@ import productsRouter from "./routes/products"
 import postsRouter from "./routes/posts"
 import usersRouter from "./routes/users"
 import categoryRouter from "./routes/category"
+import authRouter from "./routes/auth"
 
 
 const app = express();
@@ -22,6 +23,7 @@ app.use("/api", productsRouter)
 app.use("/api", postsRouter)
 app.use("/api", usersRouter)
 app.use("/api", categoryRouter)
+app.use("/api", authRouter)
 // connect database
 mongoose.connect("mongodb://localhost:27017/nodejs")
     .then(() => console.log("Kết nối db thành công"))
