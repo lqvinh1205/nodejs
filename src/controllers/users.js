@@ -1,3 +1,4 @@
+import users from "../modals/users"
 import User from "../modals/users"
 
 export const list = async (req, res) => {
@@ -52,5 +53,23 @@ export const update = async (req, res) => {
         res.status(400).json({
             messages: "Khong the update"
         })
+    }
+}
+
+
+export const userById = async (req, res, next, id) => {
+    try {
+        console.log(id);
+        const user = await User.findById(id).exec();
+        if(!user) {
+            res.status(400).json({
+                messages: "Tai khoan khong ton tai"
+            })
+        }
+        req.profile = user;
+        console.log("req.profile", req.profile);
+        next()
+    } catch (error) {
+        console.log(error);        
     }
 }

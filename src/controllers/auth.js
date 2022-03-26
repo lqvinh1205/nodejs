@@ -1,5 +1,6 @@
 import User from "../modals/users"
-
+import jwt from "jsonwebtoken"
+import expressJWT from 'express-jwt'
 export const signup = async (req, res) => {
     
     const { name, email, password } = req.body
@@ -36,14 +37,43 @@ export const signin = async (req, res) => {
                 messages: "Sai mat khau"
             })
         }
+        const token = jwt.sign({ _id: 'HELLI'}, "123456", { expiresIn: 60* 60})
         res.json({
+            token,
             user: {
                 _id: user._id,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                role: user.role
             }
         })
     } catch (error) {
         console.log(error);
     }
+}
+
+export const requireSignin = expressJWT({
+    algorithms: ["HS256"],
+    secret: "123456",
+    requestProperty: "auth"
+})
+
+export const isAuth = (req, res, next) => {
+    console.log(req.auth);
+    const status = req.profile._id == req.auth._id;
+    if(!status) {
+        res.status(400).json({
+            messages: "Ban khong co quyen truy cap"
+        })
+    }
+    next();
+}
+
+export const isAdmin = (req, res , next) => {
+    if( req.profile.role == 0) {
+        res.status(401).json({
+            messages: "Khong phaii admin"
+        })
+    }
+    next()
 }
