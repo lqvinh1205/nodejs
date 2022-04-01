@@ -11,6 +11,21 @@ const Product = new Schema({
         type: Number,
         required: true
     },
+    description: {
+        type: String,
+    },
+    images: {
+        type: String,
+    },
+    speed: {
+        type: String,
+    },
+    technology: {
+        type: String,
+    },
+    boost: {
+        type: String,
+    },
     category: {
         type: ObjectId,
         ref: "Category"

@@ -12,7 +12,8 @@ export const create = async (req, res) => {
 
 export const read = async (req, res) => {
     try {
-        const category = await Category.findById(req.id).exec();
+        console.log("id", req.params.id);
+        const category = await Category.findById(req.params.id).exec();
         console.log(category);
         const products = await Products.find({category}).exec();
         res.json({

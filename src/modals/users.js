@@ -16,6 +16,10 @@ const User = new Schema({
         required:true,
         minLength: 5 
     },
+    age: {
+        type: String,
+        default: 0
+    },
     role: {
         type: Number,
         default: 0

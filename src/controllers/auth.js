@@ -37,7 +37,7 @@ export const signin = async (req, res) => {
                 messages: "Sai mat khau"
             })
         }
-        const token = jwt.sign({ _id: 'HELLI'}, "123456", { expiresIn: 60* 60})
+        const token = jwt.sign({ _id: user._id}, "123456", { expiresIn: 60* 60})
         res.json({
             token,
             user: {
@@ -61,6 +61,8 @@ export const requireSignin = expressJWT({
 export const isAuth = (req, res, next) => {
     console.log(req.auth);
     const status = req.profile._id == req.auth._id;
+    console.log(req.profile._id);
+    console.log(req.auth._id);
     if(!status) {
         res.status(400).json({
             messages: "Ban khong co quyen truy cap"
