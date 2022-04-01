@@ -50,11 +50,10 @@ export const remove = async (req, res) => {
             messages: "Khong the xoa san pham"
         })
     }
-    // res.json(products.filter(item => item.id !== +req.params.id))
 }
 export const update = async (req, res) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params._id, req.body, { new: true })
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })
         res.json(product)
     } catch (error) {
         res.status(400).json({

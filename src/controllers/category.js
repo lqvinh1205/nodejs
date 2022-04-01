@@ -12,9 +12,7 @@ export const create = async (req, res) => {
 
 export const read = async (req, res) => {
     try {
-        console.log("id", req.params.id);
         const category = await Category.findById(req.params.id).exec();
-        console.log(category);
         const products = await Products.find({category}).exec();
         res.json({
             category,
@@ -27,6 +25,22 @@ export const read = async (req, res) => {
 export const list = async (req, res) => {
     try {
         const categorys = await Category.find().exec();
+        res.json(categorys)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+}
+export const update = async (req, res) => {
+    try {
+        const categorys = await Category.findByIdAndUpdate(req.params.id, req.body).exec();
+        res.json(categorys)
+    } catch (error) {
+        res.status(400).json({error})
+    }
+}
+export const remove = async (req, res) => {
+    try {
+        const categorys = await Category.findByIdAndRemove(req.params.id).exec();
         res.json(categorys)
     } catch (error) {
         res.status(400).json({error})
