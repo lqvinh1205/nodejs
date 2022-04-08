@@ -59,7 +59,6 @@ export const update = async (req, res) => {
 
 export const userById = async (req, res, next, id) => {
     try {
-        console.log(id);
         const user = await User.findById(id).exec();
         if(!user) {
             res.status(400).json({
@@ -67,7 +66,6 @@ export const userById = async (req, res, next, id) => {
             })
         }
         req.profile = user;
-        console.log("req.profile", req.profile);
         next()
     } catch (error) {
         console.log(error);        

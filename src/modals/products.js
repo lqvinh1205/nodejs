@@ -31,5 +31,6 @@ const Product = new Schema({
         ref: "Category"
     }
 }, { timestamps: true })
-
+Product.index({name: 'text', price: 'text'});
+// Product.index({ "$**" : "text" })
 export default mongoose.model("Product", Product)

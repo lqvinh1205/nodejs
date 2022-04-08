@@ -32,6 +32,6 @@ mongoose.connect("mongodb://localhost:27017/nodejs")
 
 // connection
 const PORT = 8000;
-app.listen(PORT, () => {
+app.listen(process.env.JWT_KEY || PORT, () => {
     console.log("server is running port ", PORT);
 })
