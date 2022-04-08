@@ -17,12 +17,10 @@
     "url": "https://github.com/lqvinh1205/nodejs/issues"
   },
   "homepage": "https://github.com/lqvinh1205/nodejs#readme",
-  "devDependencies": {
+  "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1"
-  },
-  "dependencies": {
+    "babel-preset-stage-0": "^6.24.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "express-jwt": "^6.1.1",
