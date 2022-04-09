@@ -25,7 +25,7 @@ app.use("/api", usersRouter)
 app.use("/api", categoryRouter)
 app.use("/api", authRouter)
 // connect database
-mongoose.connect("mongodb+srv://lqvinh:tmkgg123@cluster0.sjiqf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://lqvinh1205:<tmkgg123>@cluster.rzbt7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     .then(() => console.log("Kết nối db thành công"))
     .catch((error) => console.log(error))
  
