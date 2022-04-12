@@ -29,13 +29,13 @@ app.use("/api", authRouter)
 app.use("/api", cartRouter)
 app.use("/api", detailCartRouter)
 // connect database
-// mongoose.connect("mongodb+srv://lqvinh1205:tmkgg123@cluster.rzbt7.mongodb.net/nodejs?retryWrites=true&w=majority" || "mongodb://localhost:27017/nodejs")
-//     .then(() => console.log("Kết nối db thành công"))
-//     .catch((error) => console.log(error))
- 
-mongoose.connect("mongodb://localhost:27017/nodejs")
+mongoose.connect("mongodb+srv://lqvinh1205:tmkgg123@cluster.rzbt7.mongodb.net/nodejs?retryWrites=true&w=majority" || "mongodb://localhost:27017/nodejs")
     .then(() => console.log("Kết nối db thành công"))
     .catch((error) => console.log(error))
+ 
+// mongoose.connect("mongodb://localhost:27017/nodejs")
+//     .then(() => console.log("Kết nối db thành công"))
+//     .catch((error) => console.log(error))
 
 // connection
 const PORT = process.env.PORT || 8000;
