@@ -1,5 +1,7 @@
 import Product from "../modals/products";
 export const list = async (req, res) => {
+  const gt = req.query.gt
+  const lt = req.query.lt
   try {
     const products = await Product.find();
     res.json(products);
