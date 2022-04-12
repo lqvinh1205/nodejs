@@ -28,12 +28,12 @@ export const signin = async (req, res) => {
     try {
         const user = await User.findOne({email})
         if(!user) {
-            return res.json({
+            return res.status(400).json({
                 messages: "Tai khoan khong ton tai"
             })
         }      
         if(!user.authticate(password)){
-            return res.json({
+            return res.status(400).json({
                 messages: "Sai mat khau"
             })
         }
