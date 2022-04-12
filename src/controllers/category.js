@@ -1,9 +1,9 @@
-import Cart from "../modals/carts";
-import DetailCart from "../modals/detailCart";
+import Cartegory from "../modals/category";
+import Product from "../modals/products";
 
 export const create = async (req, res) => {
     try {
-        const category = await new Cart(req.body).save();
+        const category = await new Cartegory(req.body).save();
         res.json(category)
     } catch (error) {
         res.status(400).json({error})
@@ -12,8 +12,8 @@ export const create = async (req, res) => {
 
 export const read = async (req, res) => {
     try {
-        const category = await Cart.findById(req.params.id).exec();
-        const products = await DetailCart.find({category}).exec();
+        const category = await Cartegory.findById(req.params.id).exec();
+        const products = await Product.find({category}).exec();
         res.json({
             category,
             products
@@ -24,7 +24,7 @@ export const read = async (req, res) => {
 }
 export const list = async (req, res) => {
     try {
-        const categorys = await Cart.find().exec();
+        const categorys = await Cartegory.find().exec();
         res.json(categorys)
     } catch (error) {
         res.status(400).json({error})
@@ -32,7 +32,7 @@ export const list = async (req, res) => {
 }
 export const update = async (req, res) => {
     try {
-        const categorys = await Cart.findByIdAndUpdate(req.params.id, req.body).exec();
+        const categorys = await Cartegory.findByIdAndUpdate(req.params.id, req.body).exec();
         res.json(categorys)
     } catch (error) {
         res.status(400).json({error})
@@ -40,7 +40,7 @@ export const update = async (req, res) => {
 }
 export const remove = async (req, res) => {
     try {
-        const categorys = await Cart.findByIdAndRemove(req.params.id).exec();
+        const categorys = await Cartegory.findByIdAndRemove(req.params.id).exec();
         res.json(categorys)
     } catch (error) {
         res.status(400).json({error})
