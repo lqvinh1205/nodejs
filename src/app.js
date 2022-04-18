@@ -10,7 +10,6 @@ import usersRouter from "./routes/users"
 import categoryRouter from "./routes/category"
 import authRouter from "./routes/auth"
 import cartRouter from "./routes/cart"
-import detailCartRouter from "./routes/detailCart"
 
 
 const app = express();
@@ -27,15 +26,14 @@ app.use("/api", usersRouter)
 app.use("/api", categoryRouter)
 app.use("/api", authRouter)
 app.use("/api", cartRouter)
-app.use("/api", detailCartRouter)
 // connect database
-mongoose.connect("mongodb+srv://lqvinh1205:tmkgg123@cluster.rzbt7.mongodb.net/nodejs?retryWrites=true&w=majority" || "mongodb://localhost:27017/nodejs")
-    .then(() => console.log("Kết nối db thành công"))
-    .catch((error) => console.log(error))
- 
-// mongoose.connect("mongodb://localhost:27017/nodejs")
+// mongoose.connect("mongodb+srv://lqvinh1205:tmkgg123@cluster.rzbt7.mongodb.net/nodejs?retryWrites=true&w=majority" || "mongodb://localhost:27017/nodejs")
 //     .then(() => console.log("Kết nối db thành công"))
 //     .catch((error) => console.log(error))
+ 
+mongoose.connect("mongodb://localhost:27017/nodejs")
+    .then(() => console.log("Kết nối db thành công"))
+    .catch((error) => console.log(error))
 
 // connection
 const PORT = process.env.PORT || 8000;

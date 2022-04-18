@@ -1,16 +1,14 @@
 import { Router } from "express";
-import { isAdmin, isAuth, requireSignin } from "../controllers/auth";
-import { create, list, read, remove, update } from "../controllers/category";
-import { userById } from "../controllers/users";
+import { addItemToCart, getCart, updateCart } from "../controllers/carts";
 
 const route = Router();
 
-route.get("/cart", list)
-route.get("/cart", read)
-route.post("/cart", create)
-route.put("/cart/:id/edit", update)
-route.delete("/cart/:id", remove)
+route.get("/cart/:userId", getCart)
+// route.get("/cart", read)
+route.post("/cart", addItemToCart)
+route.patch("/cart", updateCart)
+// route.delete("/cart/:id", remove)
 
-route.param("userId", userById)
+// route.param("userId", userById)
 
 export default route

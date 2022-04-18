@@ -1,12 +1,20 @@
 import Product from "../modals/products";
 export const list = async (req, res) => {
-  const gt = req.query.gt
-  const lt = req.query.lt
+  const searchText = req.query.search || "";
+  const gte = req.query.gte || 0;
+  const lte = req.query.lte || 100000000;
+  const perPage = req.query._perpage || 9999999999;
+  const page = req.query._page ? req.query._page -1 : 0;
   try {
-    const products = await Product.find();
-    res.json(products);
+    const products = await Product.find()
+      .where({ name: { $regex: searchText, $options: "i" } })
+      .where("price").gte(gte).lte(lte)
+      .limit(perPage)
+      .skip(perPage * page)
+      const totalElement = await Product.find()
+    return res.json({products: products, totalElement: totalElement.length});
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       messages: "Khong tim thay san pham",
     });
   }
@@ -57,7 +65,7 @@ export const update = async (req, res) => {
 export const textSearch = async (req, res) => {
   try {
     const product = await Product.find({
-      $text: { $search: req.query.name },
+      name: { $regex: req.params.name || "" },
     }).exec();
     res.json(product);
   } catch (error) {
@@ -69,10 +77,12 @@ export const textSearch = async (req, res) => {
 
 export const rangePrice = async (req, res) => {
   try {
-    const product = await Product.find({ $and: [ 
-        {price: {$gt: req.body.range[0]}, },
-        { price: {$lt: req.body.range[1]} } 
-    ]}).exec();
+    const product = await Product.find({
+      $and: [
+        { price: { $gt: req.body.range[0] } },
+        { price: { $lt: req.body.range[1] } },
+      ],
+    }).exec();
     res.json(product);
   } catch (error) {
     res.status(400).json({
